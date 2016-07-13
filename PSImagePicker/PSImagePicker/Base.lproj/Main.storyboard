@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PSImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bK0-mJ-QYo">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="199"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="199" id="n4I-NC-gKs"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="raz-TP-Twv">
+                                <rect key="frame" x="160" y="227" width="281" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="281" id="WIx-3e-STq"/>
+                                    <constraint firstAttribute="height" constant="30" id="wx6-qS-DC3"/>
+                                </constraints>
+                                <state key="normal" title="Select the Image from Action Sheet"/>
+                                <connections>
+                                    <action selector="toOpenActionSheetImagePicker:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bS8-LJ-8SR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2l-d0-8rO">
+                                <rect key="frame" x="160" y="265" width="281" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Zic-17-zVy"/>
+                                    <constraint firstAttribute="width" constant="281" id="dA5-sV-UVb"/>
+                                </constraints>
+                                <state key="normal" title="select image from Image Picker"/>
+                                <connections>
+                                    <action selector="toOpenImagePicker:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jdH-dZ-Mwh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="raz-TP-Twv" firstAttribute="top" secondItem="bK0-mJ-QYo" secondAttribute="bottom" constant="28" id="1dR-5X-ipy"/>
+                            <constraint firstItem="P2l-d0-8rO" firstAttribute="centerX" secondItem="raz-TP-Twv" secondAttribute="centerX" id="5MD-qw-QWF"/>
+                            <constraint firstItem="P2l-d0-8rO" firstAttribute="top" secondItem="raz-TP-Twv" secondAttribute="bottom" constant="8" id="BHZ-NV-Zfe"/>
+                            <constraint firstItem="bK0-mJ-QYo" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="CdQ-Cl-kQW"/>
+                            <constraint firstItem="raz-TP-Twv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Kn6-UC-mpn"/>
+                            <constraint firstItem="bK0-mJ-QYo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="LgZ-qb-Ig4"/>
+                            <constraint firstAttribute="trailing" secondItem="bK0-mJ-QYo" secondAttribute="trailing" id="xM6-Ih-Uau"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imager" destination="bK0-mJ-QYo" id="t1a-nX-HUd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="310" y="429"/>
+        </scene>
+    </scenes>
+</document>
