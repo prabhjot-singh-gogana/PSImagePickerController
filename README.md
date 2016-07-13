@@ -1,0 +1,2 @@
+# PSImagePickerController
+PSImagePickerController is the class which inherit from UIImagePickerController. PSImagePickerController opens the action sheet which fetch the image from camera or library just with one line. Developer does not need to implement the delegates at all, he will get the image through closure. Moreover, developer can open the image picker without using action sheet just with one line.
