@@ -22,10 +22,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func toOpenImagePicker(sender: AnyObject) {
+    @IBAction func toOpenImagePicker(_ sender: AnyObject) {
         let picker = PSImagePickerController()
         picker.allowsEditing = true
-        picker.sourceType = .PhotoLibrary
+        picker.sourceType = .photoLibrary
         picker.openImagePicker({ (image, imageController, success) in
             if success == true {
                 self.imager.image = image
@@ -34,7 +34,7 @@ class ViewController: UIViewController {
             }, controller: self)
     }
 
-    @IBAction func toOpenActionSheetImagePicker(sender: AnyObject) {
+    @IBAction func toOpenActionSheetImagePicker(_ sender: AnyObject) {
         
         PSImagePickerController().openImagePickerThroughActionSheet({ (image, imageController, success) in
             

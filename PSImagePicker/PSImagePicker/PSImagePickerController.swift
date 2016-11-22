@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias ImageCompletionHandler = (image: UIImage?, imageController: UIImagePickerController?, success: Bool) -> Void
+typealias ImageCompletionHandler = (_ image: UIImage?, _ imageController: UIImagePickerController?, _ success: Bool) -> Void
 
 class PSImagePickerController: UIImagePickerController {
     
@@ -23,7 +23,7 @@ class PSImagePickerController: UIImagePickerController {
      - parameter controller:         a view controller through which you call this method
      */
     
-    func openImagePickerThroughActionSheet(imagePickerHandler: ImageCompletionHandler, controller: UIViewController) {
+    func openImagePickerThroughActionSheet(_ imagePickerHandler: @escaping ImageCompletionHandler, controller: UIViewController) {
         
         if self.delegate == nil {
             self.delegate = self
@@ -40,7 +40,7 @@ class PSImagePickerController: UIImagePickerController {
      - parameter imagePickerHandler: closure object which sends back the image and success
      - parameter controller:         a view controller through which you call this method
      */
-    func openImagePicker(imagePickerHandler: ImageCompletionHandler, controller: UIViewController) {
+    func openImagePicker(_ imagePickerHandler: @escaping ImageCompletionHandler, controller: UIViewController) {
         
         if self.delegate == nil {
             self.delegate = self
@@ -56,22 +56,22 @@ class PSImagePickerController: UIImagePickerController {
      
      - parameter controller: a view controller through which you call this method
      */
-    private func setActionController(controller: UIViewController) {
+    fileprivate func setActionController(_ controller: UIViewController) {
         
-        let sheet = UIAlertController(title: "Select Image From", message: nil, preferredStyle: .ActionSheet)
-        sheet.addAction(UIAlertAction(title: "Camera", style: .Default, handler: { (alertAction) in
+        let sheet = UIAlertController(title: "Select Image From", message: nil, preferredStyle: .actionSheet)
+        sheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (alertAction) in
             self.loadCamera(controller)
         }))
         
-        sheet.addAction(UIAlertAction(title: "Photo Library", style: .Default, handler: { (alertAction) in
+        sheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (alertAction) in
             self.loadPhotoLibrary(controller)
         }))
         
-        sheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (alertAction) in
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (alertAction) in
             
         }))
         
-        controller.presentViewController(sheet, animated: true, completion: nil)
+        controller.present(sheet, animated: true, completion: nil)
         
     }
     
@@ -81,13 +81,13 @@ class PSImagePickerController: UIImagePickerController {
      
      - parameter controller: a view controller through which you call this method
      */
-    private func loadPhotoLibrary(controller: UIViewController) {
+    fileprivate func loadPhotoLibrary(_ controller: UIViewController) {
         
-        if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
-            self.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            self.sourceType = UIImagePickerControllerSourceType.photoLibrary
             self.showImagePicker(controller)
         } else {
-            self.imageCompletionHandler!(image: nil, imageController: nil, success: false)
+            self.imageCompletionHandler!(nil, nil, false)
         }
     }
     
@@ -96,19 +96,19 @@ class PSImagePickerController: UIImagePickerController {
      
      - parameter controller: a view controller through which you call this method
      */
-    private func loadCamera(controller: UIViewController) {
+    fileprivate func loadCamera(_ controller: UIViewController) {
         
-        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-            self.sourceType = UIImagePickerControllerSourceType.Camera
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            self.sourceType = UIImagePickerControllerSourceType.camera
             self.showImagePicker(controller)
         } else {
-            self.imageCompletionHandler!(image: nil, imageController: nil, success: false)
+            self.imageCompletionHandler!(nil, nil, false)
         }
     }
     
     // Used to show the picker
-    private func showImagePicker(controller: UIViewController) {
-        controller.presentViewController(self, animated: true, completion: nil)
+    fileprivate func showImagePicker(_ controller: UIViewController) {
+        controller.present(self, animated: true, completion: nil)
     }
 }
 
@@ -116,23 +116,23 @@ class PSImagePickerController: UIImagePickerController {
 
 extension PSImagePickerController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let tempImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-            self.imageCompletionHandler!(image: tempImage, imageController: picker, success: true)
+            self.imageCompletionHandler!(tempImage, picker, true)
         } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.imageCompletionHandler!(image: originalImage, imageController: picker, success: true)
+            self.imageCompletionHandler!(originalImage, picker, true)
         } else {
-            self.imageCompletionHandler!(image: nil, imageController: picker, success: false)
+            self.imageCompletionHandler!(nil, picker, false)
         }
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
-        self.imageCompletionHandler!(image: nil, imageController: picker, success: false)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.imageCompletionHandler!(nil, picker, false)
+        self.dismiss(animated: true, completion: nil)
     }
 
     
